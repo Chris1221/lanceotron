@@ -9,7 +9,10 @@ from joblib import Parallel, delayed
 import csv
 import pickle
 from sklearn.preprocessing import StandardScaler
-import tensorflow as tf
+
+# This is so annoying.
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
+from tensorflow.config.threading import set_intra_op_parallelism_threads, set_inter_op_parallelism_threads
 
 import pkg_resources
 
@@ -296,8 +299,8 @@ def run_genome(args):
     window_list = [100, 200, 400, 800, 1600]
     threshold_list = [1, 2, 4, 8, 16]
 
-    tf.config.threading.set_intra_op_parallelism_threads(1)
-    tf.config.threading.set_inter_op_parallelism_threads(1)
+    set_intra_op_parallelism_threads(1)
+    set_inter_op_parallelism_threads(1)
 
     chrom_list = []
     threshold_list = []
