@@ -1,5 +1,6 @@
 #!/package/python3-base/3.8.3/bin/python3.8
 
+import pkg_resources
 from . import lanceotron
 from . import classic as LoT
 import numpy as np
@@ -15,6 +16,8 @@ from tensorflow.config.threading import set_intra_op_parallelism_threads, set_in
 from tensorflow import keras
 from tensorflow.keras.models import load_model
 from tensorflow.keras import backend as K
+
+from tqdm import tqdm
 
 
 def build_model():
@@ -88,7 +91,9 @@ def build_model():
     output = keras.layers.Dense(2, activation='softmax', name='overall_classification')(wide_and_deep)
     model = keras.models.Model(inputs=[input_deep, input_wide], outputs=[output, shape_output, pvalue_output])
     model.compile(optimizer=keras.optimizers.Adam(learning_rate), loss=['binary_crossentropy', 'binary_crossentropy', 'binary_crossentropy'], loss_weights=[0.7, 0.3, 0], metrics=['accuracy'])
-    model.load_weights('/package/lanceotron/20210519/models/wide_and_deep_fully_trained_v5_03.h5')
+
+
+    model.load_weights(pkg_resources.resource_filename("lanceotron.static", "wide_and_deep_fully_trained_v5_03.h5"))
     return model
 
 
@@ -165,7 +170,7 @@ def classify_chrom_bed_list(chrom, bigWig_file, bed_list, base_model_file, out_f
                 f.write('\n')
     K.clear_session()
     
-def classify_chrom_bed_list_alt(chrom, bigWig_file, bed_list, base_model_file, out_folder):
+def classify_chrom_bed_list_alt(chrom, bigWig_file, bed_list, base_model_file, out_folder, read_coverage_factor):
     pyBigWig_object=pyBigWig.open(bigWig_file)
     read_coverage_total = pyBigWig_object.header()['sumData']
     read_coverage_rphm = read_coverage_total/read_coverage_factor
@@ -183,13 +188,22 @@ def classify_chrom_bed_list_alt(chrom, bigWig_file, bed_list, base_model_file, o
         if bed_entry[0] == chrom[0]:
             coord_list.append([bed_entry[1], bed_entry[2]])
             id_list.append(bed_entry[3])
+
+
+    
+    wide_path = pkg_resources.resource_filename('lanceotron.static', 'standard_scaler_wide_v5_03.p')
+    deep_path = pkg_resources.resource_filename('lanceotron.static', 'standard_scaler_deep_v5_03.p')
+
+
+    standard_scaler_wide = pickle.load(open(wide_path, 'rb'))
+    standard_scaler_deep = pickle.load(open(deep_path, 'rb'))
+
+
     X_wide_array, X_deep_array = LoT.extract_signal_wide_and_deep_chrom(coverage_array, coord_list, read_coverage_rphm)
-    standard_scaler_wide = pickle.load(open('/package/lanceotron/20210519/standard_scaler/standard_scaler_wide_v5_03.p', 'rb'))
     X_wide_array_norm = standard_scaler_wide.transform(X_wide_array)
     X_wide_array_norm = np.expand_dims(X_wide_array_norm, axis=2)
     standard_scaler = StandardScaler()
     X_deep_array_norm_T = standard_scaler.fit_transform(X_deep_array.T)
-    standard_scaler_deep = pickle.load(open('/package/lanceotron/20210519/standard_scaler/standard_scaler_deep_v5_03.p', 'rb'))
     X_deep_array_norm = standard_scaler_deep.transform(X_deep_array_norm_T.T)
     X_deep_array_norm = np.expand_dims(X_deep_array_norm, axis=2)
     model = build_model()
@@ -242,10 +256,12 @@ def scoreBed(args):
             
     cores = 1
 
+    chrom_iterator = tqdm(chrom_list, desc = "Processing chromosome")
+
     if 'wide_and_deep_fully_trained_v5' in base_model_file:
-        Parallel(n_jobs=cores)(delayed(classify_chrom_bed_list_alt)(chrom, bigWig_file, bed_list, base_model_file, merge_folder) for chrom in chrom_list)
+        Parallel(n_jobs=cores)(delayed(classify_chrom_bed_list_alt)(chrom, bigWig_file, bed_list, base_model_file, merge_folder, read_coverage_factor) for chrom in chrom_iterator)
     else:
-        Parallel(n_jobs=cores)(delayed(classify_chrom_bed_list)(chrom, bigWig_file, bed_list, base_model_file, merge_folder) for chrom in chrom_list)
+        Parallel(n_jobs=cores)(delayed(classify_chrom_bed_list)(chrom, bigWig_file, bed_list, base_model_file, merge_folder, read_coverage_factor) for chrom in chrom_iterator)
 
     with open('{}complete.txt'.format(out_folder), 'w') as f:
         f.write('')

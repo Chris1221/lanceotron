@@ -9,13 +9,20 @@ from joblib import Parallel, delayed
 import csv
 import pickle
 from sklearn.preprocessing import StandardScaler
+from pathlib import Path
+from tqdm import tqdm
 
-# This is so annoying.
+# Pickle warnings are unnecessary. If it breaks, it breaks.
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning, module='sklearn')
+
+# Running TF in CPU mode will generate warnings that I don't care about.
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 from tensorflow.config.threading import set_intra_op_parallelism_threads, set_inter_op_parallelism_threads
 
 import pkg_resources
 
+# TODO: Load time could be improved by explicitly naming imports.
 from tensorflow import keras
 from tensorflow.keras.models import load_model
 from tensorflow.keras import backend as K
@@ -294,7 +301,9 @@ def run_genome(args):
     cores = args.cores
     pipeline = args.pipeline
 
-    print('reserving {} core(s) on cluster'.format(cores))
+    # This is now an option on the command line
+    # so setting it is explicit.
+    #print('reserving {} core(s) on cluster'.format(cores))
 
     window_list = [100, 200, 400, 800, 1600]
     threshold_list = [1, 2, 4, 8, 16]
@@ -321,17 +330,20 @@ def run_genome(args):
 
     #cores = 16
     cores = 1 
+
+    chrom_iterator = tqdm(chrom_list, desc = "Calling chromosomes")
         
     if grid_search=='True':
-        Parallel(n_jobs=cores)(delayed(classify_chrom_grid_search)(chrom, bigWig_file, window_list, threshold_list, min_peak_width, base_model_file, merge_folder) for chrom in chrom_list)
+        Parallel(n_jobs=cores)(delayed(classify_chrom_grid_search)(chrom, bigWig_file, window_list, threshold_list, min_peak_width, base_model_file, merge_folder) for chrom in chrom_iterator)
     # This string will never start with the name, it's sufficient that it should contain the model name.
     elif 'wide_and_deep_fully_trained_v5' in base_model_file:
-        print('alt signal extraction and model')
+        # Also now a command line option, no need for output.
+        #print('alt signal extraction and model')
         bigwig_data = LoT.Bigwig_data(bigWig_file)
         genome_stats_dict = bigwig_data.get_genome_info(include_special_chromosomes=False)
-        Parallel(n_jobs=cores)(delayed(classify_chrom_alt)(chrom, genome_stats_dict[chrom[0]], read_coverage_factor, bigWig_file, window, threshold, min_peak_width, base_model_file, merge_folder) for chrom in chrom_list)
+        Parallel(n_jobs=cores)(delayed(classify_chrom_alt)(chrom, genome_stats_dict[chrom[0]], read_coverage_factor, bigWig_file, window, threshold, min_peak_width, base_model_file, merge_folder) for chrom in chrom_iterator)
     else:
-        Parallel(n_jobs=cores)(delayed(classify_chrom)(chrom, bigWig_file, window, threshold, min_peak_width, base_model_file, merge_folder) for chrom in chrom_list)
+        Parallel(n_jobs=cores)(delayed(classify_chrom)(chrom, bigWig_file, window, threshold, min_peak_width, base_model_file, merge_folder) for chrom in chrom_iterator)
 
 
     with open('{}chrom_enrichment_thresholds.txt'.format(out_folder), 'w') as f:
@@ -345,10 +357,13 @@ def run_genome(args):
     if pipeline:
         from glob import glob
         import natsort
-        filename_split = bigWig_file.split('.')
-        with open('{}{}.bed'.format(out_folder, filename_split[0]), 'w') as singleFile:
+        # This doesn't really work with paths
+        #filename_split = bigWig_file.split('.')
+        # Take the file name portion of the bigWig file and use it to name the bed.
+        filename = Path(bigWig_file).stem
+        with open('{}{}.bed'.format(out_folder, filename), 'w') as singleFile:
             singleFile.write('chrom\tstart\tend\tH3K4me1_score\tnoise_score\tATAC_score\tH3K4me3_score\tTF_score\tH3K27ac_score\n')
-        with open('{}{}.bed'.format(out_folder, filename_split[0]), 'a') as singleFile:
+        with open('{}{}.bed'.format(out_folder, filename), 'a') as singleFile:
             for csvFile in natsort.natsorted(glob('{}*.bed'.format(merge_folder))):
                 for line in open(csvFile, 'r'):
                     singleFile.write(line)

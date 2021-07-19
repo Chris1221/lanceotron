@@ -8,6 +8,9 @@ def bed_file_to_list(bed_file):
     with open(bed_file, 'r') as f:
         bed_reader = csv.reader(f, delimiter='\t')
         for row in bed_reader:
+            # Using a merged pipelined bed file
+            if row[0].lower() in ["chrom", "chr"]:
+                continue
             bed_list.append([row[0], int(row[1]), int(row[2]), row[3]])
     return bed_list
 

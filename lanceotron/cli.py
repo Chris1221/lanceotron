@@ -24,7 +24,7 @@ def genome():
     callpeaks.add_argument('-m', '--model', type=str, default = model_path, help='Deep learning model to classify candidate peaks')
     callpeaks.add_argument('-g', '--grid', type=str, default = False, help='grid search across all parameters')
     callpeaks.add_argument('-c', '--cores', type=int, default=1, help='number of cores to use in parallel')
-    callpeaks.add_argument('-p', '--pipeline', type=bool, default=False, help='True/False - if true will merge output into single bedfile')
+    callpeaks.add_argument('-p', '--pipeline', type=bool, default=True, help='True/False - if true will merge output into single bedfile')
     callpeaks.set_defaults(func = run_genome)
 
     scorebed = subparsers.add_parser("scoreBed")
