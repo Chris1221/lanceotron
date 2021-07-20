@@ -16,7 +16,7 @@ def genome():
     parser = argparse.ArgumentParser(description='Sort significantly enriched regions of ChIP-seq singnals using a CNN')
     subparsers = parser.add_subparsers(help='sub-command help')
     
-    callpeaks = subparsers.add_parser("callpeaks")
+    callpeaks = subparsers.add_parser("callPeaks")
     callpeaks.add_argument('file', help='bigwig file')
     callpeaks.add_argument('-f', '--folder', type=str, help='folder to write results to')
     callpeaks.add_argument('-t', '--threshold', type=float, default = 4, help='threshold used for selecting candidate peaks')

@@ -171,6 +171,8 @@ def classify_chrom_alt(chrom, chrom_stats_dict, read_coverage_factor, bigWig_fil
     read_coverage_rphm = read_coverage_total/read_coverage_factor
     pyBigWig_object.close()
     bigwig_data = LoT.Bigwig_data(bigWig_file)
+
+    import pdb; pdb.set_trace()
     
     if base_model_file == 'wide_and_deep_fully_trained_v5_03_grid_candidate.h5':
         window_list = [100, 200, 400, 800, 1600]
@@ -243,6 +245,8 @@ def classify_chrom_alt(chrom, chrom_stats_dict, read_coverage_factor, bigWig_fil
         X_wide_list = X_wide_array[i][:-1].tolist()
         out_list+=X_wide_list
         chrom_file_out.append(out_list)
+
+        import pdb; pdb.set_trace()
     with open('{}{}.bed'.format(out_folder, chrom[0]), 'w', newline='') as f:
         bed_writer = csv.writer(f, delimiter='\t')
         bed_writer.writerows(chrom_file_out)
@@ -337,6 +341,8 @@ def run_genome(args):
         Parallel(n_jobs=cores)(delayed(classify_chrom_grid_search)(chrom, bigWig_file, window_list, threshold_list, min_peak_width, base_model_file, merge_folder) for chrom in chrom_iterator)
     # This string will never start with the name, it's sufficient that it should contain the model name.
     elif 'wide_and_deep_fully_trained_v5' in base_model_file:
+
+        import pdb; pdb.set_trace()
         # Also now a command line option, no need for output.
         #print('alt signal extraction and model')
         bigwig_data = LoT.Bigwig_data(bigWig_file)
