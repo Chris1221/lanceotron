@@ -3,6 +3,7 @@ import sys
 
 from .genome import run_genome
 from .scoreBed import scoreBed
+from .find_and_score_peaks import find_and_score_peaks
 
 import pkg_resources
 
@@ -33,6 +34,15 @@ def genome():
     scorebed.add_argument('-f', '--folder', type=str, help='folder in public directory for writing')
     scorebed.add_argument('-m', '--model', type=str, default = model_path, help='Deep learning model to classify candidate peaks')
     scorebed.set_defaults(func = scoreBed)
+
+    findandscore = subparsers.add_parser("callPeaks2")
+    findandscore.add_argument('file', help='bigwig file')
+    findandscore.add_argument('-t', '--threshold', type=float, default=4, help='initial threshold used for selecting candidate peaks; default=4')
+    findandscore.add_argument('-w', '--window', type=int, default=400, help='window size for rolling mean to use for selecting candidate peaks; default=400')
+    findandscore.add_argument('-f', '--folder', type=str, default='./', help='folder to write results to; default=current directory')
+    findandscore.add_argument('--skipheader', default=False, action='store_true', help='skip writing header')
+    findandscore.set_defaults(func = find_and_score_peaks)
+
 
 
     # Parse the arguments and quit if no file specified.
