@@ -10,7 +10,7 @@ setup(
    packages=['lanceotron'],  #same as name
    entry_points={
         'console_scripts': [
-            'lanceotron = lanceotron.cli:genome',
+            'lanceotron = lanceotron.cli:cli',
         ],
     }
 )

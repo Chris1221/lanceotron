@@ -52,8 +52,19 @@ To call peaks from a bigWig track with an input file, use the `callPeaks_Input` 
 | -f, --folder    | Output folder                                          | "./"    |
 | --skipheader    | Skip writing the header                                | False   |
 
+## Score a Bed file
 
-### Examples
+To score the peaks in an existing Bed file, use the `scoreBed` command.
+
+| Option          | Description                                            | Default |
+|-----------------|--------------------------------------------------------|---------|
+| file            | BigWig Track to analyse                                |         |
+| -b, --bed | Bed file of regions to be scored                |        |
+| -f, --folder    | Output folder                                          | "./"    |
+| --skipheader    | Skip writing the header                                | False   |
+
+
+## Examples
 
 There is a basic bigWig file included in the `test` subdirectory. To try out the caller, execute it on this file. 
 
