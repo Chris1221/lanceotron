@@ -1,5 +1,5 @@
 
-from . import lanceotron_new as Ltron
+from . import lanceotron as Ltron
 import os, sys
 import numpy as np
 import pyBigWig
