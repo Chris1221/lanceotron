@@ -39,3 +39,28 @@ To call peaks from a bigWig track, use the `callPeaks` command.
 | --skipheader    | Skip writing the header                                | False   |
 
 
+### Examples
+
+There is a basic bigWig file included in the `test` subdirectory. To try out the caller, execute it on this file. 
+
+```sh
+lanceotron callPeaks test/chr22.bw -f output_folder
+```
+
+## Citation
+
+```{bibtex}
+@article {Hentges2021.01.25.428108,
+	author = {Hentges, Lance D. and Sergeant, Martin J. and Downes, Damien J. and Hughes, Jim R. and Taylor, Stephen},
+	title = {LanceOtron: a deep learning peak caller for ATAC-seq, ChIP-seq, and DNase-seq},
+	year = {2021},
+	doi = {10.1101/2021.01.25.428108},
+	publisher = {Cold Spring Harbor Laboratory},
+	URL = {https://www.biorxiv.org/content/early/2021/01/27/2021.01.25.428108},
+	journal = {bioRxiv}
+}
+```
+
+## Bug Reports and Improvement Suggestions
+
+Please [raise an issue](https://github.com/Chris1221/lanceotron/issues/new/choose) if there is anything you wish to ask or contribute. 
