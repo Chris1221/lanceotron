@@ -39,6 +39,20 @@ To call peaks from a bigWig track, use the `callPeaks` command.
 | --skipheader    | Skip writing the header                                | False   |
 
 
+## Call Peaks with Input
+
+To call peaks from a bigWig track with an input file, use the `callPeaks_Input` command.
+
+| Option          | Description                                            | Default |
+|-----------------|--------------------------------------------------------|---------|
+| file            |  BigWig track to analyse                                |         |
+| -i, --input     | Control input track to calculate significance of peaks                               |         |
+| -t, --threshold | Threshold for selecting candidate peaks                | 4       |
+| -w, --window    | Window size for rolling mean to select candidate peaks | 400     |
+| -f, --folder    | Output folder                                          | "./"    |
+| --skipheader    | Skip writing the header                                | False   |
+
+
 ### Examples
 
 There is a basic bigWig file included in the `test` subdirectory. To try out the caller, execute it on this file. 

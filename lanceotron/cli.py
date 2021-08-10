@@ -2,6 +2,7 @@ import argparse
 import sys
 
 from .find_and_score_peaks import find_and_score_peaks
+from .find_peaks_with_input import call_peaks_with_input
 
 import pkg_resources
 
@@ -43,6 +44,15 @@ def genome():
     findandscore.add_argument('--skipheader', default=False, action='store_true', help='skip writing header')
     findandscore.set_defaults(func = find_and_score_peaks)
 
+    parser = argparse.ArgumentParser(description='Sort significantly enriched regions of ChIP-seq singnals using a CNN')
+    fas_input = subparsers.add_parser("callPeaksInput")
+    fas_input.add_argument('file', help='bigwig file')
+    fas_input.add_argument('-i', '--input', type=str, help='control input track used to calculate Poisson-based significance of peaks')
+    fas_input.add_argument('-t', '--threshold', type=float, default=4, help='initial threshold used for selecting candidate peaks; default=4')
+    fas_input.add_argument('-w', '--window', type=int, default=400, help='window size for rolling mean to use for selecting candidate peaks; default=400')
+    fas_input.add_argument('-f', '--folder', type=str, default='./', help='folder to write results to; default=current directory')
+    fas_input.add_argument('--skipheader', default=False, action='store_true', help='skip writing header')
+    fas_input.set_defaults(func = call_peaks_with_input)
 
 
     # Parse the arguments and quit if no file specified.
