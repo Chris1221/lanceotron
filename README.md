@@ -1,5 +1,7 @@
 # LanceOTron CLI
 
+[![CircleCI](https://circleci.com/gh/Chris1221/lanceotron/tree/main.svg?style=svg&circle-token=bf3f78a54437e63368f5b9dc1c536d7f32f32393)](https://circleci.com/gh/Chris1221/lanceotron/tree/main)
+
 A bare-bones interface to the trained LanceOTron (LoT) model from the command line.
 
 ## Installation
