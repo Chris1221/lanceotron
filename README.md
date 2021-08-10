@@ -24,30 +24,16 @@ To see available commands, use the `--help` flag.
 lanceotron --help
 ```
 
-Making the Lance-o-tron model slightly easier to use through a python package.
+## Call Peaks
 
-Main improvements:
+To call peaks from a bigWig track, use the `callPeaks` command.
 
-- Model files are stored internally with the use of `pkg_resources`. They can still be specified on the command line if desired.
-- A centralised CLI dispatch with a single entry point `lanceotron`
-- Small improvements to usability
-    - Hiding uninformative warning messages
-    - Progress bars 
-
-Working so far:
-- `lanceotron_genome.py` is now `lanceotron callPeak` with the same parameters
-- `lanceotron_scoreBed.py` is now `lanceotron scoreBed` with the same parameters.
-
-I haven't converted the other scripts over yet. 
+| Option          | Description                                            | Default |
+|-----------------|--------------------------------------------------------|---------|
+| file            | BigWig Track to analyse                                |         |
+| -t, --threshold | Threshold for selecting candidate peaks                | 4       |
+| -w, --window    | Window size for rolling mean to select candidate peaks | 400     |
+| -f, --folder    | Output folder                                          | "./"    |
+| --skipheader    | Skip writing the header                                | False   |
 
 
-## To install3
-n
-
-```sh
-conda create -n lanceotron python=3.8; conda activate lanceotron
-pip install -r requirements
-pip install -e . 
-
-lanceotron -h
-```
