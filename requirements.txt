@@ -1,8 +1,8 @@
 pyBigWig
-sklearn==0.23.1 # to avoid a warning
+sklearn # to avoid a warning
 joblib
 numpy
-tensorflow>2.3.0
+tensorflow>2
 scipy
 natsort
 tqdm
