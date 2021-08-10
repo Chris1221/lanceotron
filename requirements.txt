@@ -2,8 +2,7 @@ pyBigWig
 sklearn==0.23.1 # to avoid a warning
 joblib
 numpy
-tensorflow==2.3.0
+tensorflow>2.3.0
 scipy
-keras==2.4
 natsort
 tqdm

@@ -1,4 +1,28 @@
-# lanceotron
+# LanceOTron CLI
+
+A bare-bones interface to the trained LanceOTron (LoT) model from the command line.
+
+## Installation
+
+1. Clone the repository.
+2. Install dependencies with pip.
+3. Install the package.
+4. Run tests to ensure that everything is working.
+
+```{sh}
+git clone git@github.com:Chris1221/lanceotron.git; cd lanceotron # Step 1
+pip install -r requirements.txt # Step 2
+pip install -e . # Step 3
+python -m unittest
+```
+
+## Usage
+
+To see available commands, use the `--help` flag.
+
+```
+lanceotron --help
+```
 
 Making the Lance-o-tron model slightly easier to use through a python package.
 
@@ -17,7 +41,8 @@ Working so far:
 I haven't converted the other scripts over yet. 
 
 
-## To install
+## To install3
+n
 
 ```sh
 conda create -n lanceotron python=3.8; conda activate lanceotron
