@@ -1,5 +1,6 @@
 
 from . import lanceotron as Ltron
+from .utils import make_directory_name
 import os, sys
 import numpy as np
 import pyBigWig
@@ -86,7 +87,7 @@ def build_model():
 
 def find_and_score_peaks(args):
     bigwig_file = args.file
-    out_folder = args.folder
+    out_folder = make_directory_name(args.folder)
     initial_threshold = args.threshold
     window = args.window
     skip_header = args.skipheader

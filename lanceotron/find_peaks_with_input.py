@@ -1,5 +1,6 @@
 
 from . import lanceotron as Ltron
+from .utils import make_directory_name
 import os, sys
 import numpy as np
 import pyBigWig
@@ -97,7 +98,7 @@ def calculate_pvalue_from_input(chrom, start, end, seq_depth_test, seq_depth_con
 def call_peaks_with_input(args):
     bigwig_file = args.file
     control_file = args.input
-    out_folder = args.folder
+    out_folder = make_directory_name(args.folder)
     initial_threshold = args.threshold
     window = args.window
     skip_header = args.skipheader
