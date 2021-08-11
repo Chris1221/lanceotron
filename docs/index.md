@@ -1,8 +1,11 @@
-# LanceOTron CLI
+# LanceOTron Command Line Interface
 
 [![CircleCI](https://circleci.com/gh/Chris1221/lanceotron/tree/main.svg?style=svg&circle-token=bf3f78a54437e63368f5b9dc1c536d7f32f32393)](https://circleci.com/gh/Chris1221/lanceotron/tree/main)
 
-A bare-bones interface to the trained LanceOTron (LoT) model from the command line.
+A bare-bones interface to the trained LanceOTron (LoT) model from the command line. 
+
+LoT is an all-in-one peak caller that identifies peak regions from a coverage track and uses a convolutional neural network to classify them based on their shape. This algorithm has a web client available at https://lanceotron.molbiol.ox.ac.uk/ where users can upload coverage tracks, call peaks, and visualize them using [multi locus view](https://lanceotron.readthedocs.io/en/latest/multi_locus_view/multi_locus_view.html), a powerful visualization engine. This web client will do most of the heavy lifting for most of the people that want to use the tool, but for those who need to call peaks in batch mode we provide a command line interface in this package. This document details the installation of LoT as well as typical use cases. See the left side of this page for tutorials on the three main modules. 
+
 
 ## Installation
 
@@ -84,14 +87,6 @@ lanceotron callPeaks test/chr22.bw -f output_folder
 	URL = {https://www.biorxiv.org/content/early/2021/01/27/2021.01.25.428108},
 	journal = {bioRxiv}
 }
-```
-
-## Building the documentation
-
-To serve the documentation locally, use
-
-```
-python -m mkdocs serve
 ```
 
 ## Bug Reports and Improvement Suggestions
