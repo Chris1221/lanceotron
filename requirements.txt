@@ -2,6 +2,7 @@ pyBigWig
 sklearn # to avoid a warning
 joblib
 numpy
+pandas
 tensorflow>2
 scipy
 natsort
