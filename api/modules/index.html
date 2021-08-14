@@ -318,6 +318,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#modules" class="md-nav__link">
+    Modules
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#lanceotron.modules.find_and_score_peaks" class="md-nav__link">
     lanceotron.modules.find_and_score_peaks
   </a>
@@ -334,6 +341,20 @@
         <li class="md-nav__item">
   <a href="#lanceotron.modules.score_bed" class="md-nav__link">
     lanceotron.modules.score_bed
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#utilities" class="md-nav__link">
+    Utilities
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lanceotron.utils.build_model" class="md-nav__link">
+    lanceotron.utils.build_model
   </a>
   
 </li>
@@ -378,6 +399,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#modules" class="md-nav__link">
+    Modules
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#lanceotron.modules.find_and_score_peaks" class="md-nav__link">
     lanceotron.modules.find_and_score_peaks
   </a>
@@ -394,6 +422,20 @@
         <li class="md-nav__item">
   <a href="#lanceotron.modules.score_bed" class="md-nav__link">
     lanceotron.modules.score_bed
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#utilities" class="md-nav__link">
+    Utilities
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lanceotron.utils.build_model" class="md-nav__link">
+    lanceotron.utils.build_model
   </a>
   
 </li>
@@ -416,9 +458,8 @@
                 
                 
                 <h1 id="module-api-reference">Module API Reference</h1>
-<blockquote>
-<p>Need to document these functions. At the moment, they are only parameterised by the CLI. Make this into a splat pattern where the options are explicit with the function definition and not just with a dotdict</p>
-</blockquote>
+<p>API reference for developers.</p>
+<h2 id="modules">Modules</h2>
 
 
   <div class="doc doc-object doc-function">
@@ -815,6 +856,95 @@
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;chrom</span><span class="se">\t</span><span class="s1">start</span><span class="se">\t</span><span class="s1">end</span><span class="se">\t</span><span class="s1">overall_peak_score</span><span class="se">\t</span><span class="s1">shape_score</span><span class="se">\t</span><span class="s1">enrichment_score</span><span class="se">\t</span><span class="s1">pvalue_chrom</span><span class="se">\t</span><span class="s1">pvalue_10kb</span><span class="se">\t</span><span class="s1">pvalue_20kb</span><span class="se">\t</span><span class="s1">pvalue_30kb</span><span class="se">\t</span><span class="s1">pvalue_40kb</span><span class="se">\t</span><span class="s1">pvalue_50kb</span><span class="se">\t</span><span class="s1">pvalue_60kb</span><span class="se">\t</span><span class="s1">pvalue_70kb</span><span class="se">\t</span><span class="s1">pvalue_80kb</span><span class="se">\t</span><span class="s1">pvalue_90kb</span><span class="se">\t</span><span class="s1">pvalue_100kb</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">bed_writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">bed_writer</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">bed_file_out</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+<h2 id="utilities">Utilities</h2>
+
+
+  <div class="doc doc-object doc-function">
+
+<a id="lanceotron.utils.build_model"></a>
+    <div class="doc doc-contents first">
+
+      <p>Build and return the Lanceotron Keras model.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>lanceotron/utils.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">build_model</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Build and return the Lanceotron Keras model.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">deep_dense_size</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">dropout_rate</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">first_filter_num</span> <span class="o">=</span> <span class="mi">70</span>
+    <span class="n">first_filter_size</span> <span class="o">=</span> <span class="mi">9</span>
+    <span class="n">hidden_filter_num</span> <span class="o">=</span> <span class="mi">120</span>
+    <span class="n">hidden_filter_size</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.0001</span>
+    <span class="n">wide_and_deep_dense_size</span> <span class="o">=</span> <span class="mi">70</span>
+
+    <span class="n">input_wide</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">wide_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Flatten</span><span class="p">()(</span><span class="n">input_wide</span><span class="p">)</span>
+    <span class="n">input_deep</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">((</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">deep_model</span> <span class="o">=</span> <span class="n">input_deep</span>
+
+    <span class="c1"># deep model first conv layer </span>
+    <span class="n">deep_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Convolution1D</span><span class="p">(</span><span class="n">first_filter_num</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="n">first_filter_size</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)(</span><span class="n">deep_model</span><span class="p">)</span>
+    <span class="n">deep_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">deep_model</span><span class="p">)</span>
+    <span class="n">deep_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LeakyReLU</span><span class="p">()(</span><span class="n">deep_model</span><span class="p">)</span>
+
+    <span class="c1"># deep model - 4 conv blocks</span>
+    <span class="n">deep_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Convolution1D</span><span class="p">(</span><span class="n">hidden_filter_num</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="n">hidden_filter_size</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)(</span><span class="n">deep_model</span><span class="p">)</span>
+    <span class="n">deep_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">deep_model</span><span class="p">)</span>
+    <span class="n">deep_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LeakyReLU</span><span class="p">()(</span><span class="n">deep_model</span><span class="p">)</span>
+    <span class="n">deep_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">MaxPool1D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)(</span><span class="n">deep_model</span><span class="p">)</span>
+
+    <span class="n">deep_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Convolution1D</span><span class="p">(</span><span class="n">hidden_filter_num</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="n">hidden_filter_size</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)(</span><span class="n">deep_model</span><span class="p">)</span>
+    <span class="n">deep_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">deep_model</span><span class="p">)</span>
+    <span class="n">deep_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LeakyReLU</span><span class="p">()(</span><span class="n">deep_model</span><span class="p">)</span>
+    <span class="n">deep_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">MaxPool1D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)(</span><span class="n">deep_model</span><span class="p">)</span>
+
+    <span class="n">deep_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Convolution1D</span><span class="p">(</span><span class="n">hidden_filter_num</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="n">hidden_filter_size</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)(</span><span class="n">deep_model</span><span class="p">)</span>
+    <span class="n">deep_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">deep_model</span><span class="p">)</span>
+    <span class="n">deep_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LeakyReLU</span><span class="p">()(</span><span class="n">deep_model</span><span class="p">)</span>
+    <span class="n">deep_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">MaxPool1D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)(</span><span class="n">deep_model</span><span class="p">)</span>
+
+    <span class="n">deep_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Convolution1D</span><span class="p">(</span><span class="n">hidden_filter_num</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="n">hidden_filter_size</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)(</span><span class="n">deep_model</span><span class="p">)</span>
+    <span class="n">deep_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">deep_model</span><span class="p">)</span>
+    <span class="n">deep_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LeakyReLU</span><span class="p">()(</span><span class="n">deep_model</span><span class="p">)</span>
+    <span class="n">deep_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">MaxPool1D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)(</span><span class="n">deep_model</span><span class="p">)</span>
+
+    <span class="c1"># deep model - dense layer with dropout </span>
+    <span class="n">deep_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">deep_dense_size</span><span class="p">)(</span><span class="n">deep_model</span><span class="p">)</span>
+    <span class="n">deep_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">deep_model</span><span class="p">)</span>
+    <span class="n">deep_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LeakyReLU</span><span class="p">()(</span><span class="n">deep_model</span><span class="p">)</span>
+    <span class="n">deep_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">dropout_rate</span><span class="p">)(</span><span class="n">deep_model</span><span class="p">)</span>
+    <span class="n">deep_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Flatten</span><span class="p">()(</span><span class="n">deep_model</span><span class="p">)</span>
+
+    <span class="c1"># shape output only dense layer</span>
+    <span class="n">shape_output</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;shape_classification&#39;</span><span class="p">)(</span><span class="n">deep_model</span><span class="p">)</span>
+
+    <span class="c1"># p-value output only dense layer</span>
+    <span class="n">pvalue_output</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;pvalue_classification&#39;</span><span class="p">)(</span><span class="n">wide_model</span><span class="p">)</span>
+
+    <span class="c1"># combine wide and deep paths</span>
+    <span class="n">concat</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">wide_model</span><span class="p">,</span> <span class="n">deep_model</span><span class="p">,</span> <span class="n">pvalue_output</span><span class="p">])</span>
+    <span class="n">wide_and_deep</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">wide_and_deep_dense_size</span><span class="p">)(</span><span class="n">concat</span><span class="p">)</span>
+    <span class="n">wide_and_deep</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">wide_and_deep</span><span class="p">)</span>
+    <span class="n">wide_and_deep</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LeakyReLU</span><span class="p">()(</span><span class="n">wide_and_deep</span><span class="p">)</span>
+    <span class="n">wide_and_deep</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">wide_and_deep_dense_size</span><span class="p">)(</span><span class="n">wide_and_deep</span><span class="p">)</span>
+    <span class="n">wide_and_deep</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">wide_and_deep</span><span class="p">)</span>
+    <span class="n">wide_and_deep</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LeakyReLU</span><span class="p">()(</span><span class="n">wide_and_deep</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;overall_classification&#39;</span><span class="p">)(</span><span class="n">wide_and_deep</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">input_deep</span><span class="p">,</span> <span class="n">input_wide</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">output</span><span class="p">,</span> <span class="n">shape_output</span><span class="p">,</span> <span class="n">pvalue_output</span><span class="p">])</span>
+
+    <span class="c1"># load model weights</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">load_weights</span><span class="p">(</span><span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;lanceotron.static&quot;</span><span class="p">,</span> <span class="s2">&quot;wide_and_deep_fully_trained_v5_03.h5&quot;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">model</span>
 </code></pre></div>
         </details>
     </div>
