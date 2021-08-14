@@ -11,12 +11,6 @@ from scipy.stats import poisson
 import csv
 import pkg_resources
 
-class dotdict(dict):
-    """dot.notation access to dictionary attributes"""
-    __getattr__ = dict.get
-    __setattr__ = dict.__setitem__
-    __delattr__ = dict.__delitem__
-
 def make_directory_name(directory: str) -> str:
     """Ensures a trailing slash on directory names.
 

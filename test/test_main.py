@@ -5,7 +5,7 @@ import os
 
 import numpy as np
 
-from lanceotron import find_and_score_peaks, dotdict
+from lanceotron import find_and_score_peaks
 from tensorflow import keras
 
 # Simple run through on toy data
@@ -13,13 +13,13 @@ class TestAll(unittest.TestCase):
     """Full run through on toy data
     """
     def test_example(self):
-        find_and_score_peaks(dotdict({
+        find_and_score_peaks(**{
             "file": "test/chr22.bw",
             "folder": "./",
             "threshold": 4,
             "window": 400,
             "skipheader": False
-        }))
+        })
 
 class TestResources(unittest.TestCase):
     """Ensure that all of the resources are available.

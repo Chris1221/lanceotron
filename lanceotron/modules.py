@@ -12,12 +12,26 @@ import csv
 import pkg_resources
 
 
-def find_and_score_peaks(args):
-    bigwig_file = args.file
-    out_folder = make_directory_name(args.folder)
-    initial_threshold = args.threshold
-    window = args.window
-    skip_header = args.skipheader
+def find_and_score_peaks(
+        file: str, 
+        threshold: int = 4,
+        window: int = 400, 
+        folder: str = "./", 
+        skipheader: bool = False) -> None:
+    """Call peaks from a coverage track and score them using the LanceOTron model.
+
+    Args:
+        file (str): Path to bigwig track.
+        threshold (int, optional): Initial threshold used for selecting candidate peaks. Defaults to 4.
+        window (int, optional): Window size for rolling mean to use for selecting candidate peaks. Defaults to 400.
+        folder (str, optional): Output folder. Defaults to "./".
+        skipheader (bool, optional): Skip writing header. Defaults to False.
+    """
+    
+    
+    bigwig_file = file
+    out_folder = make_directory_name(folder)
+    initial_threshold = threshold
 
     min_peak_width = 50
     max_peak_width = 2000
@@ -64,18 +78,33 @@ def find_and_score_peaks(args):
             bed_file_out+=chrom_file_out
 
     with open(out_folder+out_file_name, 'w', newline='') as f:
-        if not skip_header:
+        if not skipheader:
             f.write('chrom\tstart\tend\toverall_peak_score\tshape_score\tenrichment_score\tpvalue_chrom\tpvalue_10kb\tpvalue_20kb\tpvalue_30kb\tpvalue_40kb\tpvalue_50kb\tpvalue_60kb\tpvalue_70kb\tpvalue_80kb\tpvalue_90kb\tpvalue_100kb\n')
         bed_writer = csv.writer(f, delimiter='\t')
         bed_writer.writerows(bed_file_out)
 
-def call_peaks_with_input(args):
-    bigwig_file = args.file
-    control_file = args.input
-    out_folder = make_directory_name(args.folder)
-    initial_threshold = args.threshold
-    window = args.window
-    skip_header = args.skipheader
+def call_peaks_with_input(
+        file: str, 
+        input: str,
+        threshold: int = 4,
+        window: int = 400, 
+        folder: str = "./", 
+        skipheader: bool = False) -> None:
+    """Call peaks from a coverage track and score them using the LanceOTron model.
+
+    Args:
+        file (str): Path to bigwig track.
+        input (str): Control input track used to calculate Poisson-based significance of peaks.
+        threshold (int, optional): Initial threshold used for selecting candidate peaks. Defaults to 4.
+        window (int, optional): Window size for rolling mean to use for selecting candidate peaks. Defaults to 400.
+        folder (str, optional): Output folder. Defaults to "./".
+        skipheader (bool, optional): Skip writing header. Defaults to False.
+    """
+
+    bigwig_file = file
+    control_file = input
+    out_folder = make_directory_name(folder)
+    initial_threshold = threshold
 
     min_peak_width = 50
     max_peak_width = 2000
@@ -130,18 +159,27 @@ def call_peaks_with_input(args):
             bed_file_out+=chrom_file_out
 
     with open(out_folder+out_file_name, 'w', newline='') as f:
-        if not skip_header:
+        if not skipheader:
             f.write('chrom\tstart\tend\toverall_peak_score\tshape_score\tenrichment_score\tpvalue_input\tpvalue_chrom\tpvalue_10kb\tpvalue_20kb\tpvalue_30kb\tpvalue_40kb\tpvalue_50kb\tpvalue_60kb\tpvalue_70kb\tpvalue_80kb\tpvalue_90kb\tpvalue_100kb\n')
         bed_writer = csv.writer(f, delimiter='\t')
         bed_writer.writerows(bed_file_out)
 
-def score_bed(args):
-    """Score an existing BED file of peaks from a coverage track using Lanceotron's model.
+def score_bed(
+    file: str,
+    bed: str,
+    folder: str = "./",
+    skipheader: bool = False) -> None:
+    """Score an existing bed file using LanceOTron's model and a coverage track.
+
+    Args:
+        file (str): Input bigWig track.
+        bed (str): Bed file of regions to score.
+        folder (str): Output folder. Defaults to "./".
+        skipheader (bool): Skip writing header. Defaults to False.
     """
-    bigwig_file = args.file
-    out_folder = make_directory_name(args.folder)
-    bed_file = args.bed
-    skip_header = args.skipheader
+    bigwig_file = file
+    out_folder = make_directory_name(folder)
+    bed_file = bed
 
     read_coverage_factor = 10**9
     out_file_name = bigwig_file.split('/')[-1].split('.')[0]+'_L-tron.bed'
@@ -194,7 +232,7 @@ def score_bed(args):
             bed_file_out+=chrom_file_out
 
     with open(out_folder+out_file_name, 'w', newline='') as f:
-        if not skip_header:
+        if not skipheader:
             f.write('chrom\tstart\tend\toverall_peak_score\tshape_score\tenrichment_score\tpvalue_chrom\tpvalue_10kb\tpvalue_20kb\tpvalue_30kb\tpvalue_40kb\tpvalue_50kb\tpvalue_60kb\tpvalue_70kb\tpvalue_80kb\tpvalue_90kb\tpvalue_100kb\n')
         bed_writer = csv.writer(f, delimiter='\t')
         bed_writer.writerows(bed_file_out)
