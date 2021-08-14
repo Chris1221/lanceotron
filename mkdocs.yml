@@ -7,8 +7,7 @@ nav:
   - Overview: index.md
   - Tutorials:
     - Basic Peak Calling: genome_tutorial.md 
-  - API Documentation:
-    - Modules: api/modules.md 
+  - API Documentation: api/modules.md 
 
 theme:
   name: material

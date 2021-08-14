@@ -90,7 +90,7 @@ def call_peaks_with_input(
         window: int = 400, 
         folder: str = "./", 
         skipheader: bool = False) -> None:
-    """Call peaks from a coverage track and score them using the LanceOTron model.
+    """Call peaks from a coverage track with an input and score them using the LanceOTron model.
 
     Args:
         file (str): Path to bigwig track.

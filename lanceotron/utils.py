@@ -28,7 +28,7 @@ def make_directory_name(directory: str) -> str:
 
 def build_model():
     """
-    Build and return the Lanceotron Keras model
+    Build and return the Lanceotron Keras model.
     """
     deep_dense_size = 10
     dropout_rate = 0.5

@@ -33,39 +33,20 @@ lanceotron --help
 
 To call peaks from a bigWig track, use the `callPeaks` command.
 
-| Option          | Description                                            | Default |
-|-----------------|--------------------------------------------------------|---------|
-| file            | BigWig Track to analyse                                |         |
-| -t, --threshold | Threshold for selecting candidate peaks                | 4       |
-| -w, --window    | Window size for rolling mean to select candidate peaks | 400     |
-| -f, --folder    | Output folder                                          | "./"    |
-| --skipheader    | Skip writing the header                                | False   |
+::: lanceotron.find_and_score_peaks
 
 
 ## Call Peaks with Input
 
 To call peaks from a bigWig track with an input file, use the `callPeaks_Input` command.
 
-| Option          | Description                                            | Default |
-|-----------------|--------------------------------------------------------|---------|
-| file            |  BigWig track to analyse                                |         |
-| -i, --input     | Control input track to calculate significance of peaks                               |         |
-| -t, --threshold | Threshold for selecting candidate peaks                | 4       |
-| -w, --window    | Window size for rolling mean to select candidate peaks | 400     |
-| -f, --folder    | Output folder                                          | "./"    |
-| --skipheader    | Skip writing the header                                | False   |
+::: lanceotron.call_peaks_with_input
 
 ## Score a Bed file
 
 To score the peaks in an existing Bed file, use the `scoreBed` command.
 
-| Option          | Description                                            | Default |
-|-----------------|--------------------------------------------------------|---------|
-| file            | BigWig Track to analyse                                |         |
-| -b, --bed | Bed file of regions to be scored                |        |
-| -f, --folder    | Output folder                                          | "./"    |
-| --skipheader    | Skip writing the header                                | False   |
-
+::: lanceotron.score_bed
 
 ## Examples
 
