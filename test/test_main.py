@@ -4,22 +4,51 @@ import pkg_resources
 import os
 
 import numpy as np
+import pandas as pd
 
 from lanceotron import find_and_score_peaks
 from tensorflow import keras
+
+# Simple test run
+simple_run = {
+    "file": "test/chr22.bw",
+    "folder": "./",
+    "threshold": 4,
+    "window": 400,
+    "skipheader": False
+}
 
 # Simple run through on toy data
 class TestAll(unittest.TestCase):
     """Full run through on toy data
     """
     def test_example(self):
-        find_and_score_peaks(**{
-            "file": "test/chr22.bw",
-            "folder": "./",
-            "threshold": 4,
-            "window": 400,
-            "skipheader": False
-        })
+        find_and_score_peaks(**simple_run)
+
+class TestOutput(unittest.TestCase):
+    # Little hack for avoiding running for each test case 
+    @classmethod
+    def setUpClass(cls):
+        super(TestOutput, cls).setUpClass()
+        find_and_score_peaks(**simple_run)
+        cls.output = pd.read_csv(simple_run["file"].split("/")[-1].replace(".bw", "_L-tron.bed"), sep = "\t")
+
+    def test_colnames(self):
+        for col in ['chrom', 'start', 'end', 'overall_peak_score', 'shape_score']:
+            assert col in self.output.columns
+
+    def test_nrow(self):
+        assert self.output.shape[0] > 1
+
+    def test_ncol(self):
+        assert self.output.shape[1] == 17
+
+    def test_coltypes(self):
+        assert str(self.output["chrom"].dtype) == "object"
+        assert str(self.output["start"].dtype) == "int64"
+        assert str(self.output["end"].dtype) == "int64"
+        assert str(self.output["shape_score"].dtype) == "float64"
+
 
 class TestResources(unittest.TestCase):
     """Ensure that all of the resources are available.
