@@ -259,6 +259,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#lanceotron.modules.find_and_score_peaks" class="md-nav__link">
+    lanceotron.modules.find_and_score_peaks
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#call-peaks-with-input" class="md-nav__link">
     Call Peaks with Input
   </a>
@@ -266,8 +273,22 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#lanceotron.modules.call_peaks_with_input" class="md-nav__link">
+    lanceotron.modules.call_peaks_with_input
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#score-a-bed-file" class="md-nav__link">
     Score a Bed file
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lanceotron.modules.score_bed" class="md-nav__link">
+    lanceotron.modules.score_bed
   </a>
   
 </li>
@@ -350,37 +371,10 @@
   
   
   
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
-      
-      <label class="md-nav__link" for="__nav_3">
-        API Documentation
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="API Documentation" data-md-level="1">
-        <label class="md-nav__title" for="__nav_3">
-          <span class="md-nav__icon md-icon"></span>
-          API Documentation
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
     <li class="md-nav__item">
       <a href="api/modules/" class="md-nav__link">
-        Modules
+        API Documentation
       </a>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
     </li>
   
 
@@ -432,6 +426,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#lanceotron.modules.find_and_score_peaks" class="md-nav__link">
+    lanceotron.modules.find_and_score_peaks
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#call-peaks-with-input" class="md-nav__link">
     Call Peaks with Input
   </a>
@@ -439,8 +440,22 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#lanceotron.modules.call_peaks_with_input" class="md-nav__link">
+    lanceotron.modules.call_peaks_with_input
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#score-a-bed-file" class="md-nav__link">
     Score a Bed file
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lanceotron.modules.score_bed" class="md-nav__link">
+    lanceotron.modules.score_bed
   </a>
   
 </li>
@@ -505,118 +520,412 @@ python -m unittest
 </code></pre>
 <h2 id="call-peaks">Call Peaks</h2>
 <p>To call peaks from a bigWig track, use the <code>callPeaks</code> command.</p>
+
+
+  <div class="doc doc-object doc-function">
+
+<a id="lanceotron.modules.find_and_score_peaks"></a>
+    <div class="doc doc-contents first">
+
+      <p>Call peaks from a coverage track and score them using the LanceOTron model.</p>
+
+<p><strong>Parameters:</strong></p>
 <table>
-<thead>
-<tr>
-<th>Option</th>
-<th>Description</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>file</td>
-<td>BigWig Track to analyse</td>
-<td></td>
-</tr>
-<tr>
-<td>-t, --threshold</td>
-<td>Threshold for selecting candidate peaks</td>
-<td>4</td>
-</tr>
-<tr>
-<td>-w, --window</td>
-<td>Window size for rolling mean to select candidate peaks</td>
-<td>400</td>
-</tr>
-<tr>
-<td>-f, --folder</td>
-<td>Output folder</td>
-<td>"./"</td>
-</tr>
-<tr>
-<td>--skipheader</td>
-<td>Skip writing the header</td>
-<td>False</td>
-</tr>
-</tbody>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>file</code></td>
+        <td><code>str</code></td>
+        <td><p>Path to bigwig track.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>threshold</code></td>
+        <td><code>int</code></td>
+        <td><p>Initial threshold used for selecting candidate peaks. Defaults to 4.</p></td>
+        <td><code>4</code></td>
+      </tr>
+      <tr>
+        <td><code>window</code></td>
+        <td><code>int</code></td>
+        <td><p>Window size for rolling mean to use for selecting candidate peaks. Defaults to 400.</p></td>
+        <td><code>400</code></td>
+      </tr>
+      <tr>
+        <td><code>folder</code></td>
+        <td><code>str</code></td>
+        <td><p>Output folder. Defaults to "./".</p></td>
+        <td><code>&#39;./&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>skipheader</code></td>
+        <td><code>bool</code></td>
+        <td><p>Skip writing header. Defaults to False.</p></td>
+        <td><code>False</code></td>
+      </tr>
+  </tbody>
 </table>
+        <details class="quote">
+          <summary>Source code in <code>lanceotron/modules.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">find_and_score_peaks</span><span class="p">(</span>
+        <span class="n">file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+        <span class="n">threshold</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="n">window</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">400</span><span class="p">,</span> 
+        <span class="n">folder</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;./&quot;</span><span class="p">,</span> 
+        <span class="n">skipheader</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Call peaks from a coverage track and score them using the LanceOTron model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        file (str): Path to bigwig track.</span>
+<span class="sd">        threshold (int, optional): Initial threshold used for selecting candidate peaks. Defaults to 4.</span>
+<span class="sd">        window (int, optional): Window size for rolling mean to use for selecting candidate peaks. Defaults to 400.</span>
+<span class="sd">        folder (str, optional): Output folder. Defaults to &quot;./&quot;.</span>
+<span class="sd">        skipheader (bool, optional): Skip writing header. Defaults to False.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="n">bigwig_file</span> <span class="o">=</span> <span class="n">file</span>
+    <span class="n">out_folder</span> <span class="o">=</span> <span class="n">make_directory_name</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
+    <span class="n">initial_threshold</span> <span class="o">=</span> <span class="n">threshold</span>
+
+    <span class="n">min_peak_width</span> <span class="o">=</span> <span class="mi">50</span>
+    <span class="n">max_peak_width</span> <span class="o">=</span> <span class="mi">2000</span>
+    <span class="n">read_coverage_factor</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">9</span>
+    <span class="n">out_file_name</span> <span class="o">=</span> <span class="n">bigwig_file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;_L-tron.bed&#39;</span>
+
+    <span class="n">pyBigWig_object</span> <span class="o">=</span> <span class="n">pyBigWig</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">bigwig_file</span><span class="p">)</span>
+    <span class="n">read_coverage_total</span> <span class="o">=</span> <span class="n">pyBigWig_object</span><span class="o">.</span><span class="n">header</span><span class="p">()[</span><span class="s1">&#39;sumData&#39;</span><span class="p">]</span>
+    <span class="n">read_coverage_rphm</span> <span class="o">=</span> <span class="n">read_coverage_total</span><span class="o">/</span><span class="n">read_coverage_factor</span>
+    <span class="n">pyBigWig_object</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">bigwig_data</span> <span class="o">=</span> <span class="n">Ltron</span><span class="o">.</span><span class="n">Bigwig_data</span><span class="p">(</span><span class="n">bigwig_file</span><span class="p">)</span>
+    <span class="n">genome_stats_dict</span> <span class="o">=</span> <span class="n">bigwig_data</span><span class="o">.</span><span class="n">get_genome_info</span><span class="p">()</span>
+    <span class="n">bed_file_out</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">chrom</span> <span class="ow">in</span> <span class="n">genome_stats_dict</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">chrom</span><span class="p">)</span>
+        <span class="n">coverage_array_smooth</span> <span class="o">=</span> <span class="n">bigwig_data</span><span class="o">.</span><span class="n">make_chrom_coverage_map</span><span class="p">(</span><span class="n">genome_stats_dict</span><span class="p">[</span><span class="n">chrom</span><span class="p">],</span> <span class="n">smoothing</span><span class="o">=</span><span class="n">window</span><span class="p">)</span>
+        <span class="n">enriched_region_coord_list</span> <span class="o">=</span> <span class="n">Ltron</span><span class="o">.</span><span class="n">label_enriched_regions_dynamic_threshold_width</span><span class="p">(</span><span class="n">coverage_array_smooth</span><span class="p">,</span> <span class="n">genome_stats_dict</span><span class="p">[</span><span class="n">chrom</span><span class="p">][</span><span class="s1">&#39;chrom_mean&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">initial_threshold</span><span class="p">,</span> <span class="n">genome_stats_dict</span><span class="p">[</span><span class="n">chrom</span><span class="p">][</span><span class="s1">&#39;chrom_mean&#39;</span><span class="p">],</span> <span class="n">max_peak_width</span><span class="p">,</span> <span class="n">min_region_size</span><span class="o">=</span><span class="n">min_peak_width</span><span class="p">)</span>
+        <span class="n">chrom_file_out</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">enriched_region_coord_list</span><span class="p">:</span>
+            <span class="n">wide_path</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;lanceotron.static&#39;</span><span class="p">,</span> <span class="s1">&#39;standard_scaler_wide_v5_03.p&#39;</span><span class="p">)</span>
+            <span class="n">deep_path</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;lanceotron.static&#39;</span><span class="p">,</span> <span class="s1">&#39;standard_scaler_deep_v5_03.p&#39;</span><span class="p">)</span>
+
+            <span class="n">coverage_array</span> <span class="o">=</span> <span class="n">bigwig_data</span><span class="o">.</span><span class="n">make_chrom_coverage_map</span><span class="p">(</span><span class="n">genome_stats_dict</span><span class="p">[</span><span class="n">chrom</span><span class="p">])</span><span class="o">/</span><span class="n">read_coverage_rphm</span>
+            <span class="n">X_wide_array</span><span class="p">,</span> <span class="n">X_deep_array</span> <span class="o">=</span> <span class="n">Ltron</span><span class="o">.</span><span class="n">extract_signal_wide_and_deep_chrom</span><span class="p">(</span><span class="n">coverage_array</span><span class="p">,</span> <span class="n">enriched_region_coord_list</span><span class="p">,</span> <span class="n">read_coverage_rphm</span><span class="p">)</span>
+            <span class="n">standard_scaler_wide</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">wide_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+            <span class="n">X_wide_array_norm</span> <span class="o">=</span> <span class="n">standard_scaler_wide</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_wide_array</span><span class="p">)</span>
+            <span class="n">X_wide_array_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">X_wide_array_norm</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">standard_scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+            <span class="n">X_deep_array_norm_T</span> <span class="o">=</span> <span class="n">standard_scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_deep_array</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+            <span class="n">standard_scaler_deep</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">deep_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+            <span class="n">X_deep_array_norm</span> <span class="o">=</span> <span class="n">standard_scaler_deep</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_deep_array_norm_T</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+            <span class="n">X_deep_array_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">X_deep_array_norm</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">()</span>
+            <span class="n">model_classifications</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="n">X_deep_array_norm</span><span class="p">,</span> <span class="n">X_wide_array_norm</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">K</span><span class="o">.</span><span class="n">clear_session</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">coord_pair</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">enriched_region_coord_list</span><span class="p">):</span>
+                <span class="n">out_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">chrom</span><span class="p">,</span> <span class="n">coord_pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">coord_pair</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">model_classifications</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">model_classifications</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">model_classifications</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
+                <span class="n">X_wide_list</span> <span class="o">=</span> <span class="n">X_wide_array</span><span class="p">[</span><span class="n">i</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+                <span class="n">X_wide_list</span> <span class="o">=</span> <span class="p">[</span><span class="mf">100.</span> <span class="k">if</span> <span class="n">x</span><span class="o">&gt;</span><span class="mi">10</span> <span class="k">else</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X_wide_list</span><span class="p">]</span>
+                <span class="n">out_list</span><span class="o">+=</span><span class="n">X_wide_list</span>
+                <span class="n">chrom_file_out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">out_list</span><span class="p">)</span>
+            <span class="n">bed_file_out</span><span class="o">+=</span><span class="n">chrom_file_out</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">out_folder</span><span class="o">+</span><span class="n">out_file_name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">skipheader</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;chrom</span><span class="se">\t</span><span class="s1">start</span><span class="se">\t</span><span class="s1">end</span><span class="se">\t</span><span class="s1">overall_peak_score</span><span class="se">\t</span><span class="s1">shape_score</span><span class="se">\t</span><span class="s1">enrichment_score</span><span class="se">\t</span><span class="s1">pvalue_chrom</span><span class="se">\t</span><span class="s1">pvalue_10kb</span><span class="se">\t</span><span class="s1">pvalue_20kb</span><span class="se">\t</span><span class="s1">pvalue_30kb</span><span class="se">\t</span><span class="s1">pvalue_40kb</span><span class="se">\t</span><span class="s1">pvalue_50kb</span><span class="se">\t</span><span class="s1">pvalue_60kb</span><span class="se">\t</span><span class="s1">pvalue_70kb</span><span class="se">\t</span><span class="s1">pvalue_80kb</span><span class="se">\t</span><span class="s1">pvalue_90kb</span><span class="se">\t</span><span class="s1">pvalue_100kb</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">bed_writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">bed_writer</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">bed_file_out</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
 <h2 id="call-peaks-with-input">Call Peaks with Input</h2>
 <p>To call peaks from a bigWig track with an input file, use the <code>callPeaks_Input</code> command.</p>
+
+
+  <div class="doc doc-object doc-function">
+
+<a id="lanceotron.modules.call_peaks_with_input"></a>
+    <div class="doc doc-contents first">
+
+      <p>Call peaks from a coverage track with an input and score them using the LanceOTron model.</p>
+
+<p><strong>Parameters:</strong></p>
 <table>
-<thead>
-<tr>
-<th>Option</th>
-<th>Description</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>file</td>
-<td>BigWig track to analyse</td>
-<td></td>
-</tr>
-<tr>
-<td>-i, --input</td>
-<td>Control input track to calculate significance of peaks</td>
-<td></td>
-</tr>
-<tr>
-<td>-t, --threshold</td>
-<td>Threshold for selecting candidate peaks</td>
-<td>4</td>
-</tr>
-<tr>
-<td>-w, --window</td>
-<td>Window size for rolling mean to select candidate peaks</td>
-<td>400</td>
-</tr>
-<tr>
-<td>-f, --folder</td>
-<td>Output folder</td>
-<td>"./"</td>
-</tr>
-<tr>
-<td>--skipheader</td>
-<td>Skip writing the header</td>
-<td>False</td>
-</tr>
-</tbody>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>file</code></td>
+        <td><code>str</code></td>
+        <td><p>Path to bigwig track.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>input</code></td>
+        <td><code>str</code></td>
+        <td><p>Control input track used to calculate Poisson-based significance of peaks.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>threshold</code></td>
+        <td><code>int</code></td>
+        <td><p>Initial threshold used for selecting candidate peaks. Defaults to 4.</p></td>
+        <td><code>4</code></td>
+      </tr>
+      <tr>
+        <td><code>window</code></td>
+        <td><code>int</code></td>
+        <td><p>Window size for rolling mean to use for selecting candidate peaks. Defaults to 400.</p></td>
+        <td><code>400</code></td>
+      </tr>
+      <tr>
+        <td><code>folder</code></td>
+        <td><code>str</code></td>
+        <td><p>Output folder. Defaults to "./".</p></td>
+        <td><code>&#39;./&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>skipheader</code></td>
+        <td><code>bool</code></td>
+        <td><p>Skip writing header. Defaults to False.</p></td>
+        <td><code>False</code></td>
+      </tr>
+  </tbody>
 </table>
+        <details class="quote">
+          <summary>Source code in <code>lanceotron/modules.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">call_peaks_with_input</span><span class="p">(</span>
+        <span class="n">file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+        <span class="nb">input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">threshold</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="n">window</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">400</span><span class="p">,</span> 
+        <span class="n">folder</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;./&quot;</span><span class="p">,</span> 
+        <span class="n">skipheader</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Call peaks from a coverage track with an input and score them using the LanceOTron model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        file (str): Path to bigwig track.</span>
+<span class="sd">        input (str): Control input track used to calculate Poisson-based significance of peaks.</span>
+<span class="sd">        threshold (int, optional): Initial threshold used for selecting candidate peaks. Defaults to 4.</span>
+<span class="sd">        window (int, optional): Window size for rolling mean to use for selecting candidate peaks. Defaults to 400.</span>
+<span class="sd">        folder (str, optional): Output folder. Defaults to &quot;./&quot;.</span>
+<span class="sd">        skipheader (bool, optional): Skip writing header. Defaults to False.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">bigwig_file</span> <span class="o">=</span> <span class="n">file</span>
+    <span class="n">control_file</span> <span class="o">=</span> <span class="nb">input</span>
+    <span class="n">out_folder</span> <span class="o">=</span> <span class="n">make_directory_name</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
+    <span class="n">initial_threshold</span> <span class="o">=</span> <span class="n">threshold</span>
+
+    <span class="n">min_peak_width</span> <span class="o">=</span> <span class="mi">50</span>
+    <span class="n">max_peak_width</span> <span class="o">=</span> <span class="mi">2000</span>
+    <span class="n">read_coverage_factor</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">9</span>
+    <span class="n">out_file_name</span> <span class="o">=</span> <span class="n">bigwig_file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;_L-tron.bed&#39;</span>
+
+
+    <span class="n">pyBigWig_object</span> <span class="o">=</span> <span class="n">pyBigWig</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">bigwig_file</span><span class="p">)</span>
+    <span class="n">read_coverage_total</span> <span class="o">=</span> <span class="n">pyBigWig_object</span><span class="o">.</span><span class="n">header</span><span class="p">()[</span><span class="s1">&#39;sumData&#39;</span><span class="p">]</span>
+    <span class="n">read_coverage_rphm</span> <span class="o">=</span> <span class="n">read_coverage_total</span><span class="o">/</span><span class="n">read_coverage_factor</span>
+    <span class="n">pyBigWig_object</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">bigwig_data</span> <span class="o">=</span> <span class="n">Ltron</span><span class="o">.</span><span class="n">Bigwig_data</span><span class="p">(</span><span class="n">bigwig_file</span><span class="p">)</span>
+    <span class="n">genome_stats_dict</span> <span class="o">=</span> <span class="n">bigwig_data</span><span class="o">.</span><span class="n">get_genome_info</span><span class="p">()</span>
+    <span class="n">bed_file_out</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">chrom</span> <span class="ow">in</span> <span class="n">genome_stats_dict</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">chrom</span><span class="p">)</span>
+        <span class="n">coverage_array_smooth</span> <span class="o">=</span> <span class="n">bigwig_data</span><span class="o">.</span><span class="n">make_chrom_coverage_map</span><span class="p">(</span><span class="n">genome_stats_dict</span><span class="p">[</span><span class="n">chrom</span><span class="p">],</span> <span class="n">smoothing</span><span class="o">=</span><span class="n">window</span><span class="p">)</span>
+        <span class="n">enriched_region_coord_list</span> <span class="o">=</span> <span class="n">Ltron</span><span class="o">.</span><span class="n">label_enriched_regions_dynamic_threshold_width</span><span class="p">(</span><span class="n">coverage_array_smooth</span><span class="p">,</span> <span class="n">genome_stats_dict</span><span class="p">[</span><span class="n">chrom</span><span class="p">][</span><span class="s1">&#39;chrom_mean&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">initial_threshold</span><span class="p">,</span> <span class="n">genome_stats_dict</span><span class="p">[</span><span class="n">chrom</span><span class="p">][</span><span class="s1">&#39;chrom_mean&#39;</span><span class="p">],</span> <span class="n">max_peak_width</span><span class="p">,</span> <span class="n">min_region_size</span><span class="o">=</span><span class="n">min_peak_width</span><span class="p">)</span>
+        <span class="n">chrom_file_out</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">enriched_region_coord_list</span><span class="p">:</span>
+
+            <span class="n">wide_path</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;lanceotron.static&#39;</span><span class="p">,</span> <span class="s1">&#39;standard_scaler_wide_v5_03.p&#39;</span><span class="p">)</span>
+            <span class="n">deep_path</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;lanceotron.static&#39;</span><span class="p">,</span> <span class="s1">&#39;standard_scaler_deep_v5_03.p&#39;</span><span class="p">)</span>
+
+            <span class="n">coverage_array</span> <span class="o">=</span> <span class="n">bigwig_data</span><span class="o">.</span><span class="n">make_chrom_coverage_map</span><span class="p">(</span><span class="n">genome_stats_dict</span><span class="p">[</span><span class="n">chrom</span><span class="p">])</span><span class="o">/</span><span class="n">read_coverage_rphm</span>
+            <span class="n">X_wide_array</span><span class="p">,</span> <span class="n">X_deep_array</span> <span class="o">=</span> <span class="n">Ltron</span><span class="o">.</span><span class="n">extract_signal_wide_and_deep_chrom</span><span class="p">(</span><span class="n">coverage_array</span><span class="p">,</span> <span class="n">enriched_region_coord_list</span><span class="p">,</span> <span class="n">read_coverage_rphm</span><span class="p">)</span>
+            <span class="n">standard_scaler_wide</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">wide_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+            <span class="n">X_wide_array_norm</span> <span class="o">=</span> <span class="n">standard_scaler_wide</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_wide_array</span><span class="p">)</span>
+            <span class="n">X_wide_array_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">X_wide_array_norm</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">standard_scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+            <span class="n">X_deep_array_norm_T</span> <span class="o">=</span> <span class="n">standard_scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_deep_array</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+            <span class="n">standard_scaler_deep</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">deep_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+            <span class="n">X_deep_array_norm</span> <span class="o">=</span> <span class="n">standard_scaler_deep</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_deep_array_norm_T</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+            <span class="n">X_deep_array_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">X_deep_array_norm</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">()</span>
+            <span class="n">model_classifications</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="n">X_deep_array_norm</span><span class="p">,</span> <span class="n">X_wide_array_norm</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">pyBigWig_input</span> <span class="o">=</span> <span class="n">pyBigWig</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">control_file</span><span class="p">)</span>
+            <span class="n">read_coverage_total_input</span> <span class="o">=</span> <span class="n">pyBigWig_input</span><span class="o">.</span><span class="n">header</span><span class="p">()[</span><span class="s1">&#39;sumData&#39;</span><span class="p">]</span>
+            <span class="n">read_coverage_rphm_input</span> <span class="o">=</span> <span class="n">read_coverage_total_input</span><span class="o">/</span><span class="n">read_coverage_factor</span>
+            <span class="n">K</span><span class="o">.</span><span class="n">clear_session</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">coord_pair</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">enriched_region_coord_list</span><span class="p">):</span>
+                <span class="n">average_cov</span> <span class="o">=</span> <span class="n">coverage_array</span><span class="p">[</span><span class="n">coord_pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">coord_pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="n">read_coverage_rphm</span>
+                <span class="n">pvalue_input</span> <span class="o">=</span> <span class="n">calculate_pvalue_from_input</span><span class="p">(</span><span class="n">chrom</span><span class="p">,</span> <span class="n">coord_pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">coord_pair</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">read_coverage_total</span><span class="p">,</span> <span class="n">read_coverage_total_input</span><span class="p">,</span> <span class="n">pyBigWig_input</span><span class="p">,</span> <span class="n">average_cov</span><span class="p">)</span>
+                <span class="n">out_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">chrom</span><span class="p">,</span> <span class="n">coord_pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">coord_pair</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">model_classifications</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">model_classifications</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">model_classifications</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">pvalue_input</span><span class="p">]</span>
+                <span class="n">X_wide_list</span> <span class="o">=</span> <span class="n">X_wide_array</span><span class="p">[</span><span class="n">i</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+                <span class="n">X_wide_list</span> <span class="o">=</span> <span class="p">[</span><span class="mf">100.</span> <span class="k">if</span> <span class="n">x</span><span class="o">&gt;</span><span class="mi">10</span> <span class="k">else</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X_wide_list</span><span class="p">]</span>
+                <span class="n">out_list</span><span class="o">+=</span><span class="n">X_wide_list</span>
+                <span class="n">chrom_file_out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">out_list</span><span class="p">)</span>
+            <span class="n">pyBigWig_input</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">bed_file_out</span><span class="o">+=</span><span class="n">chrom_file_out</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">out_folder</span><span class="o">+</span><span class="n">out_file_name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">skipheader</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;chrom</span><span class="se">\t</span><span class="s1">start</span><span class="se">\t</span><span class="s1">end</span><span class="se">\t</span><span class="s1">overall_peak_score</span><span class="se">\t</span><span class="s1">shape_score</span><span class="se">\t</span><span class="s1">enrichment_score</span><span class="se">\t</span><span class="s1">pvalue_input</span><span class="se">\t</span><span class="s1">pvalue_chrom</span><span class="se">\t</span><span class="s1">pvalue_10kb</span><span class="se">\t</span><span class="s1">pvalue_20kb</span><span class="se">\t</span><span class="s1">pvalue_30kb</span><span class="se">\t</span><span class="s1">pvalue_40kb</span><span class="se">\t</span><span class="s1">pvalue_50kb</span><span class="se">\t</span><span class="s1">pvalue_60kb</span><span class="se">\t</span><span class="s1">pvalue_70kb</span><span class="se">\t</span><span class="s1">pvalue_80kb</span><span class="se">\t</span><span class="s1">pvalue_90kb</span><span class="se">\t</span><span class="s1">pvalue_100kb</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">bed_writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">bed_writer</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">bed_file_out</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
 <h2 id="score-a-bed-file">Score a Bed file</h2>
 <p>To score the peaks in an existing Bed file, use the <code>scoreBed</code> command.</p>
+
+
+  <div class="doc doc-object doc-function">
+
+<a id="lanceotron.modules.score_bed"></a>
+    <div class="doc doc-contents first">
+
+      <p>Score an existing bed file using LanceOTron's model and a coverage track.</p>
+
+<p><strong>Parameters:</strong></p>
 <table>
-<thead>
-<tr>
-<th>Option</th>
-<th>Description</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>file</td>
-<td>BigWig Track to analyse</td>
-<td></td>
-</tr>
-<tr>
-<td>-b, --bed</td>
-<td>Bed file of regions to be scored</td>
-<td></td>
-</tr>
-<tr>
-<td>-f, --folder</td>
-<td>Output folder</td>
-<td>"./"</td>
-</tr>
-<tr>
-<td>--skipheader</td>
-<td>Skip writing the header</td>
-<td>False</td>
-</tr>
-</tbody>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>file</code></td>
+        <td><code>str</code></td>
+        <td><p>Input bigWig track.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>bed</code></td>
+        <td><code>str</code></td>
+        <td><p>Bed file of regions to score.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>folder</code></td>
+        <td><code>str</code></td>
+        <td><p>Output folder. Defaults to "./".</p></td>
+        <td><code>&#39;./&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>skipheader</code></td>
+        <td><code>bool</code></td>
+        <td><p>Skip writing header. Defaults to False.</p></td>
+        <td><code>False</code></td>
+      </tr>
+  </tbody>
 </table>
+        <details class="quote">
+          <summary>Source code in <code>lanceotron/modules.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">score_bed</span><span class="p">(</span>
+    <span class="n">file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">bed</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">folder</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;./&quot;</span><span class="p">,</span>
+    <span class="n">skipheader</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Score an existing bed file using LanceOTron&#39;s model and a coverage track.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        file (str): Input bigWig track.</span>
+<span class="sd">        bed (str): Bed file of regions to score.</span>
+<span class="sd">        folder (str): Output folder. Defaults to &quot;./&quot;.</span>
+<span class="sd">        skipheader (bool): Skip writing header. Defaults to False.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">bigwig_file</span> <span class="o">=</span> <span class="n">file</span>
+    <span class="n">out_folder</span> <span class="o">=</span> <span class="n">make_directory_name</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
+    <span class="n">bed_file</span> <span class="o">=</span> <span class="n">bed</span>
+
+    <span class="n">read_coverage_factor</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">9</span>
+    <span class="n">out_file_name</span> <span class="o">=</span> <span class="n">bigwig_file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;_L-tron.bed&#39;</span>
+
+    <span class="n">pyBigWig_object</span> <span class="o">=</span> <span class="n">pyBigWig</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">bigwig_file</span><span class="p">)</span>
+    <span class="n">read_coverage_total</span> <span class="o">=</span> <span class="n">pyBigWig_object</span><span class="o">.</span><span class="n">header</span><span class="p">()[</span><span class="s1">&#39;sumData&#39;</span><span class="p">]</span>
+    <span class="n">read_coverage_rphm</span> <span class="o">=</span> <span class="n">read_coverage_total</span><span class="o">/</span><span class="n">read_coverage_factor</span>
+    <span class="n">pyBigWig_object</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">bed_list</span> <span class="o">=</span> <span class="n">Ltron</span><span class="o">.</span><span class="n">bed_file_to_list</span><span class="p">(</span><span class="n">bed_file</span><span class="p">)</span>
+    <span class="n">chroms_in_bed</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">bed_entry</span> <span class="ow">in</span> <span class="n">bed_list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">bed_entry</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">chroms_in_bed</span><span class="p">:</span>
+            <span class="n">chroms_in_bed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bed_entry</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">bigwig_data</span> <span class="o">=</span> <span class="n">Ltron</span><span class="o">.</span><span class="n">Bigwig_data</span><span class="p">(</span><span class="n">bigwig_file</span><span class="p">)</span>
+    <span class="n">genome_stats_dict</span> <span class="o">=</span> <span class="n">bigwig_data</span><span class="o">.</span><span class="n">get_genome_info</span><span class="p">(</span><span class="n">include_special_chromosomes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">bed_file_out</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">chrom</span> <span class="ow">in</span> <span class="n">chroms_in_bed</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">chrom</span><span class="p">)</span>
+        <span class="n">enriched_region_coord_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">bed_entry</span> <span class="ow">in</span> <span class="n">bed_list</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">bed_entry</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">chrom</span><span class="p">:</span>
+                <span class="n">enriched_region_coord_list</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">bed_entry</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">bed_entry</span><span class="p">[</span><span class="mi">2</span><span class="p">]])</span>
+        <span class="n">chrom_file_out</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">enriched_region_coord_list</span><span class="p">:</span>
+            <span class="n">wide_path</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;lanceotron.static&#39;</span><span class="p">,</span> <span class="s1">&#39;standard_scaler_wide_v5_03.p&#39;</span><span class="p">)</span>
+            <span class="n">deep_path</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;lanceotron.static&#39;</span><span class="p">,</span> <span class="s1">&#39;standard_scaler_deep_v5_03.p&#39;</span><span class="p">)</span>
+
+            <span class="n">coverage_array</span> <span class="o">=</span> <span class="n">bigwig_data</span><span class="o">.</span><span class="n">make_chrom_coverage_map</span><span class="p">(</span><span class="n">genome_stats_dict</span><span class="p">[</span><span class="n">chrom</span><span class="p">])</span><span class="o">/</span><span class="n">read_coverage_rphm</span>
+            <span class="n">X_wide_array</span><span class="p">,</span> <span class="n">X_deep_array</span> <span class="o">=</span> <span class="n">Ltron</span><span class="o">.</span><span class="n">extract_signal_wide_and_deep_chrom</span><span class="p">(</span><span class="n">coverage_array</span><span class="p">,</span> <span class="n">enriched_region_coord_list</span><span class="p">,</span> <span class="n">read_coverage_rphm</span><span class="p">)</span>
+            <span class="n">standard_scaler_wide</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">wide_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+            <span class="n">X_wide_array_norm</span> <span class="o">=</span> <span class="n">standard_scaler_wide</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_wide_array</span><span class="p">)</span>
+            <span class="n">X_wide_array_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">X_wide_array_norm</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">standard_scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+            <span class="n">X_deep_array_norm_T</span> <span class="o">=</span> <span class="n">standard_scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_deep_array</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+            <span class="n">standard_scaler_deep</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">deep_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+            <span class="n">X_deep_array_norm</span> <span class="o">=</span> <span class="n">standard_scaler_deep</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_deep_array_norm_T</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+            <span class="n">X_deep_array_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">X_deep_array_norm</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">()</span>
+            <span class="n">model_classifications</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="n">X_deep_array_norm</span><span class="p">,</span> <span class="n">X_wide_array_norm</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">K</span><span class="o">.</span><span class="n">clear_session</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">coord_pair</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">enriched_region_coord_list</span><span class="p">):</span>
+                <span class="n">out_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">chrom</span><span class="p">,</span> <span class="n">coord_pair</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">coord_pair</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">model_classifications</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">model_classifications</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">model_classifications</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
+                <span class="n">X_wide_list</span> <span class="o">=</span> <span class="n">X_wide_array</span><span class="p">[</span><span class="n">i</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+                <span class="n">X_wide_list</span> <span class="o">=</span> <span class="p">[</span><span class="mf">100.</span> <span class="k">if</span> <span class="n">x</span><span class="o">&gt;</span><span class="mi">10</span> <span class="k">else</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X_wide_list</span><span class="p">]</span>
+                <span class="n">out_list</span><span class="o">+=</span><span class="n">X_wide_list</span>
+                <span class="n">chrom_file_out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">out_list</span><span class="p">)</span>
+            <span class="n">bed_file_out</span><span class="o">+=</span><span class="n">chrom_file_out</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">out_folder</span><span class="o">+</span><span class="n">out_file_name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">skipheader</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;chrom</span><span class="se">\t</span><span class="s1">start</span><span class="se">\t</span><span class="s1">end</span><span class="se">\t</span><span class="s1">overall_peak_score</span><span class="se">\t</span><span class="s1">shape_score</span><span class="se">\t</span><span class="s1">enrichment_score</span><span class="se">\t</span><span class="s1">pvalue_chrom</span><span class="se">\t</span><span class="s1">pvalue_10kb</span><span class="se">\t</span><span class="s1">pvalue_20kb</span><span class="se">\t</span><span class="s1">pvalue_30kb</span><span class="se">\t</span><span class="s1">pvalue_40kb</span><span class="se">\t</span><span class="s1">pvalue_50kb</span><span class="se">\t</span><span class="s1">pvalue_60kb</span><span class="se">\t</span><span class="s1">pvalue_70kb</span><span class="se">\t</span><span class="s1">pvalue_80kb</span><span class="se">\t</span><span class="s1">pvalue_90kb</span><span class="se">\t</span><span class="s1">pvalue_100kb</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">bed_writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">bed_writer</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">bed_file_out</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
 <h2 id="examples">Examples</h2>
 <p>There is a basic bigWig file included in the <code>test</code> subdirectory. To try out the caller, execute it on this file. </p>
 <pre><code class="language-sh">lanceotron callPeaks test/chr22.bw -f output_folder
