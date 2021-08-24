@@ -17,7 +17,8 @@ def find_and_score_peaks(
         threshold: int = 4,
         window: int = 400, 
         folder: str = "./", 
-        skipheader: bool = False) -> None:
+        skipheader: bool = False,
+        **other) -> None:
     """Call peaks from a coverage track and score them using the LanceOTron model.
 
     Args:
@@ -89,7 +90,8 @@ def call_peaks_with_input(
         threshold: int = 4,
         window: int = 400, 
         folder: str = "./", 
-        skipheader: bool = False) -> None:
+        skipheader: bool = False,
+        **other) -> None:
     """Call peaks from a coverage track with an input and score them using the LanceOTron model.
 
     Args:
@@ -168,7 +170,8 @@ def score_bed(
     file: str,
     bed: str,
     folder: str = "./",
-    skipheader: bool = False) -> None:
+    skipheader: bool = False,
+    **other) -> None:
     """Score an existing bed file using LanceOTron's model and a coverage track.
 
     Args:
