@@ -5,9 +5,8 @@ import numpy as np
 import pyBigWig
 import pickle
 from sklearn.preprocessing import StandardScaler
-import tensorflow as tf
-from tensorflow import keras
-import tensorflow.keras.backend as K
+#import tensorflow as tf
+#from tensorflow import keras
 import csv
 import pkg_resources
 import pandas as pd
@@ -71,7 +70,10 @@ def find_and_score_peaks(
             X_deep_array_norm = np.expand_dims(X_deep_array_norm, axis=2)
             model = build_model()
             model_classifications = model.predict([X_deep_array_norm, X_wide_array_norm], verbose=1)
+
+            import tensorflow.keras.backend as K
             K.clear_session()
+            
             for i, coord_pair in enumerate(enriched_region_coord_list):
                 out_list = [chrom, coord_pair[0], coord_pair[1], model_classifications[0][i][0], model_classifications[1][i][0], model_classifications[2][i][0]]
                 X_wide_list = X_wide_array[i][:-1].tolist()
@@ -157,6 +159,8 @@ def call_peaks_with_input(
             pyBigWig_input = pyBigWig.open(control_file)
             read_coverage_total_input = pyBigWig_input.header()['sumData']
             read_coverage_rphm_input = read_coverage_total_input/read_coverage_factor
+            
+            import tensorflow.keras.backend as K
             K.clear_session()
             for i, coord_pair in enumerate(enriched_region_coord_list):
                 average_cov = coverage_array[coord_pair[0]:coord_pair[1]].mean()*read_coverage_rphm
@@ -234,6 +238,8 @@ def score_bed(
             X_deep_array_norm = np.expand_dims(X_deep_array_norm, axis=2)
             model = build_model()
             model_classifications = model.predict([X_deep_array_norm, X_wide_array_norm], verbose=1)
+
+            import tensorflow.keras.backend as K
             K.clear_session()
             for i, coord_pair in enumerate(enriched_region_coord_list):
                 out_list = [chrom, coord_pair[0], coord_pair[1], model_classifications[0][i][0], model_classifications[1][i][0], model_classifications[2][i][0]]

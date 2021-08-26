@@ -4,9 +4,6 @@ import numpy as np
 import pyBigWig
 import pickle
 from sklearn.preprocessing import StandardScaler
-import tensorflow as tf
-from tensorflow import keras
-import tensorflow.keras.backend as K
 from scipy.stats import poisson
 import csv
 import pkg_resources
@@ -30,6 +27,9 @@ def build_model():
     """
     Build and return the Lanceotron Keras model.
     """
+    from tensorflow import keras
+    import tensorflow.keras.backend as K
+
     deep_dense_size = 10
     dropout_rate = 0.5
     first_filter_num = 70

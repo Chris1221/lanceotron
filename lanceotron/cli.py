@@ -3,8 +3,6 @@ import sys
 
 from .modules import find_and_score_peaks, call_peaks_with_input, score_bed
 
-import pkg_resources
-
 def cli():
     parser = argparse.ArgumentParser(description='Sort significantly enriched regions of ChIP-seq singnals using a CNN')
     subparsers = parser.add_subparsers(help='sub-command help')
