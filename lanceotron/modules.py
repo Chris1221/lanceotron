@@ -10,10 +10,12 @@ from tensorflow import keras
 import tensorflow.keras.backend as K
 import csv
 import pkg_resources
+import pandas as pd
 
 
 def find_and_score_peaks(
         file: str, 
+        cutoff: float = 0,
         threshold: int = 4,
         window: int = 400, 
         folder: str = "./", 
@@ -78,11 +80,18 @@ def find_and_score_peaks(
                 chrom_file_out.append(out_list)
             bed_file_out+=chrom_file_out
 
-    with open(out_folder+out_file_name, 'w', newline='') as f:
-        if not skipheader:
-            f.write('chrom\tstart\tend\toverall_peak_score\tshape_score\tenrichment_score\tpvalue_chrom\tpvalue_10kb\tpvalue_20kb\tpvalue_30kb\tpvalue_40kb\tpvalue_50kb\tpvalue_60kb\tpvalue_70kb\tpvalue_80kb\tpvalue_90kb\tpvalue_100kb\n')
-        bed_writer = csv.writer(f, delimiter='\t')
-        bed_writer.writerows(bed_file_out)
+    output = pd.DataFrame(bed_file_out)
+    output.columns = ['chrom', 'start', 'end', 'overall_peak_score', 'shape_score', 'enrichment_score', 'pvalue_chrom', 'pvalue_10kb', 'pvalue_20kb', 'pvalue_30kb', 'pvalue_40kb', 'pvalue_50kb', 'pvalue_60kb', 'pvalue_70kb', 'pvalue_80kb', 'pvalue_90kb', 'pvalue_100kb']
+    output_thresholded = output.loc[output['overall_peak_score'] > cutoff, :] 
+    output_thresholded.to_csv(f"{out_folder}{out_file_name}", header = not skipheader, index = False, sep = "\t")
+
+
+    #with open(out_folder+out_file_name, 'w', newline='') as f:
+    #    if not skipheader:
+    #        f.write('chrom\tstart\tend\toverall_peak_score\tshape_score\tenrichment_score\tpvalue_chrom\tpvalue_10kb\tpvalue_20kb\tpvalue_30kb\tpvalue_40kb\tpvalue_50kb\tpvalue_60kb\tpvalue_70kb\tpvalue_80kb\tpvalue_90kb\tpvalue_100kb\n')
+    #    bed_writer = csv.writer(f, delimiter='\t')
+    #    import pdb; pdb.set_trace()
+    #    bed_writer.writerows(bed_file_out)
 
 def call_peaks_with_input(
         file: str, 

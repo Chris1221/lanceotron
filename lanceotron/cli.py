@@ -11,6 +11,7 @@ def cli():
 
     findandscore = subparsers.add_parser("callPeaks", help = "Call peaks from a bigWig file.")
     findandscore.add_argument('file', help='bigwig file')
+    findandscore.add_argument('-c', '--cutoff', type = float, default = 0, help = "Peak score cutoff to report region in output file.")
     findandscore.add_argument('-t', '--threshold', type=float, default=4, help='initial threshold used for selecting candidate peaks; default=4')
     findandscore.add_argument('-w', '--window', type=int, default=400, help='window size for rolling mean to use for selecting candidate peaks; default=400')
     findandscore.add_argument('-f', '--folder', type=str, default='./', help='folder to write results to; default=current directory')
