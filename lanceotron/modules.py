@@ -15,6 +15,7 @@ import pandas as pd
 def find_and_score_peaks(
         file: str, 
         cutoff: float = 0,
+        format: str = "web",
         threshold: int = 4,
         window: int = 400, 
         folder: str = "./", 
@@ -85,7 +86,13 @@ def find_and_score_peaks(
     output = pd.DataFrame(bed_file_out)
     output.columns = ['chrom', 'start', 'end', 'overall_peak_score', 'shape_score', 'enrichment_score', 'pvalue_chrom', 'pvalue_10kb', 'pvalue_20kb', 'pvalue_30kb', 'pvalue_40kb', 'pvalue_50kb', 'pvalue_60kb', 'pvalue_70kb', 'pvalue_80kb', 'pvalue_90kb', 'pvalue_100kb']
     output_thresholded = output.loc[output['overall_peak_score'] > cutoff, :] 
-    output_thresholded.to_csv(f"{out_folder}{out_file_name}", header = not skipheader, index = False, sep = "\t")
+
+    if format.lower() == "web":
+        output_thresholded.to_csv(f"{out_folder}{out_file_name}", header = not skipheader, index = False, sep = "\t")
+    elif format.lower() == "bed":
+        output_thresholded.iloc[:, 0:3].to_csv(f"{out_folder}{out_file_name}", header = not skipheader, index = False, sep = "\t")
+    else:
+        raise NotImplementedError
 
 
     #with open(out_folder+out_file_name, 'w', newline='') as f:

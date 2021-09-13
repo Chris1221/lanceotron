@@ -12,3 +12,6 @@ tqdm
 mkdocs
 mkdocs-material
 mkdocstrings
+
+# For coverage
+coverage

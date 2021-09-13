@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   python: circleci/python@0.2.1
+  codecov: codecov/codecov@1.1.1
   
 branches:
   only:
@@ -19,8 +20,13 @@ jobs:
           command: pip install .
           name: Install
       - run:
-          command: python -m unittest
+          command: coverage run -m unittest
           name: Test 
+      - run:
+          command: coverage xml -i lanceotron/*
+          name: Create coverage report
+      - codecov/upload:
+          file: coverage.xml
 
 
 workflows:
