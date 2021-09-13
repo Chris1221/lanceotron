@@ -51,7 +51,6 @@ def find_and_score_peaks(
     bed_file_out = []
 
     for chrom in genome_stats_dict:
-        print(chrom)
         coverage_array_smooth = bigwig_data.make_chrom_coverage_map(genome_stats_dict[chrom], smoothing=window)
         enriched_region_coord_list = Ltron.label_enriched_regions_dynamic_threshold_width(coverage_array_smooth, genome_stats_dict[chrom]['chrom_mean']*initial_threshold, genome_stats_dict[chrom]['chrom_mean'], max_peak_width, min_region_size=min_peak_width)
         chrom_file_out = []
@@ -142,7 +141,6 @@ def call_peaks_with_input(
     bed_file_out = []
 
     for chrom in genome_stats_dict:
-        print(chrom)
         coverage_array_smooth = bigwig_data.make_chrom_coverage_map(genome_stats_dict[chrom], smoothing=window)
         enriched_region_coord_list = Ltron.label_enriched_regions_dynamic_threshold_width(coverage_array_smooth, genome_stats_dict[chrom]['chrom_mean']*initial_threshold, genome_stats_dict[chrom]['chrom_mean'], max_peak_width, min_region_size=min_peak_width)
         chrom_file_out = []
@@ -223,7 +221,6 @@ def score_bed(
     bed_file_out = []
 
     for chrom in chroms_in_bed:
-        print(chrom)
         enriched_region_coord_list = []
         for bed_entry in bed_list:
             if bed_entry[0]==chrom:
