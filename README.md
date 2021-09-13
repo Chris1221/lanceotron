@@ -6,6 +6,12 @@ A bare-bones interface to the trained LanceOTron (LoT) model from the command li
 
 ## Installation
 
+```{sh}
+pip install lanceotron
+```
+
+### Local installation 
+
 1. Clone the repository.
 2. Install dependencies with pip.
 3. Install the package.
