@@ -1,12 +1,7 @@
-from . import lanceotron as Ltron
-import os, sys
 import numpy as np
-import pyBigWig
-import pickle
-from sklearn.preprocessing import StandardScaler
 from scipy.stats import poisson
-import csv
 import pkg_resources
+from pathlib import Path
 
 
 def make_directory_name(directory: str) -> str:
@@ -20,6 +15,9 @@ def make_directory_name(directory: str) -> str:
     """
     if directory[-1] != "/":
         directory += "/"
+
+    # Create the directory if it doens't exist
+    Path(directory).mkdir(parents = True, exist_ok = True)
 
     return directory
 
